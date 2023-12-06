@@ -1017,5 +1017,60 @@ const trebuchet = (data) => {
 	}
 	return calibratedValue
 }
+// const replacer = () => {
+// 	const wordToNum = {
+// 		one: 1,
+// 		two: 2,
+// 		three: 3,
+// 		four: 4,
+// 		five: 5,
+// 		six: 6,
+// 		seven: 7,
+// 		eight: 8,
+// 		nine: 9,
+// 	}
+// }
+const trebuchet2 = (data) => {
+	let totalSum = 0
+	const wordToNum = {
+		one: 1,
+		two: 2,
+		three: 3,
+		four: 4,
+		five: 5,
+		six: 6,
+		seven: 7,
+		eight: 8,
+		nine: 9,
+	}
+	for (let i = 0; i < data.length; i++) {
+		for (let num in wordToNum) {
+			while (data[i].includes(num)) {
+				data[i] = data[i].replace(num, wordToNum[num])
+			}
+		}
+	}
+	for (let j = 0; j < data.length; j++) {
+		let firstNum = null
+		let lastNum = null
+		for (let h = 0; h < data[j].length; h++) {
+			if (firstNum !== null && !isNaN(data[j][h])) {
+				lastNum = data[j][h]
+				// console.log(data[j], lastNum)
+			}
+			if (firstNum === null && !isNaN(data[j][h])) {
+				firstNum = data[j][h]
+				// console.log(data[j], firstNum)
+			}
+		}
+		const combinedNum = firstNum + (lastNum ?? '')
+		totalSum = totalSum + Number(combinedNum)
+		console.log(data[j], combinedNum, totalSum)
 
-trebuchet(data)
+		firstNum = null
+		lastNum = null
+	}
+	return totalSum
+}
+// trebuchet2(data)
+console.log(trebuchet2(data))
